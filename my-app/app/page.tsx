@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "../components/ThemeToggle";
+import Card from "../components/Card";
 
 export default function Home() {
   return (
@@ -9,9 +10,13 @@ export default function Home() {
       <h1>Home</h1>
       <p>Welcome to my site!</p>
 
-      <nav>
-        <Link href="/contact">Go to Contact Page</Link>
-      </nav>
+      <section>
+        <Card title="Web Design" description="We build websites." />
+        <Card title="App Development" description="We create apps." />
+        <Card title="SEO Services" description="We improve rankings." />
+      </section>
+
+      <Link href="/contact">Go to Contact Page</Link>
     </main>
   );
 }
