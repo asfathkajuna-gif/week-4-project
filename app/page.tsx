@@ -1,57 +1,37 @@
-"use client";
+import Card from "@/components/Card";
+import ContactForm from "@/components/ContactForm";
 
-import { useState } from "react";
-
-type FeatureCardProps = {
-  title: string;
-  description: string;
-};
-
-function FeatureCard({ title, description }: FeatureCardProps) {
-  return (
-    <div className="border rounded-lg p-4 m-2">
-      <h2 className="text-xl font-bold">{title}</h2>
-      <p>{description}</p>
-    </div>
-  );
-}
+const features = [
+  {
+    title: "Reusable Components",
+    description: "This page uses one Card component multiple times with different props.",
+  },
+  {
+    title: "React State",
+    description: "The form uses useState to manage user input.",
+  },
+  {
+    title: "Persistent Theme",
+    description: "The theme toggle uses useEffect and localStorage to save user preference.",
+  },
+];
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-
   return (
-    <main
-      className={`min-h-screen p-8 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
-      }`}
-    >
-      <button
-        onClick={() => setDarkMode(!darkMode)}
-        className="border px-3 py-2 rounded"
-      >
-        Toggle Theme
-      </button>
+    <main>
+      <h2>React Component Architecture</h2>
 
-      <h1 className="text-3xl font-bold mt-6">Home</h1>
+      <section>
+        {features.map((feature) => (
+          <Card
+            key={feature.title}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </section>
 
-      <p className="mt-2">Welcome to my site!</p>
-
-      <h2 className="text-2xl font-bold mt-8">My Skills</h2>
-
-      <FeatureCard
-        title="HTML"
-        description="I use HTML to structure webpages."
-      />
-
-      <FeatureCard
-        title="CSS"
-        description="I use CSS to style and design pages."
-      />
-
-      <FeatureCard
-        title="React"
-        description="I use React to build reusable components."
-      />
+      <ContactForm />
     </main>
   );
 }
