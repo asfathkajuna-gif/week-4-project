@@ -1,65 +1,62 @@
-"use client";
+// "use client";
 
-import Link from "next/link";
-import ThemeToggle from "../../components/ThemeToggle";
+// export default function ContactPage() {
+//   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+//     e.preventDefault();
 
-export default function ContactPage() {
-  function handleSubmit(e: any) {
-    e.preventDefault();
+//     const name = document.getElementById("name") as HTMLInputElement;
+//     const email = document.getElementById("email") as HTMLInputElement;
+//     const message = document.getElementById("message") as HTMLTextAreaElement;
+//     const result = document.getElementById("form-result") as HTMLParagraphElement;
 
-    const name = (document.getElementById("name") as HTMLInputElement).value;
-    const email = (document.getElementById("email") as HTMLInputElement).value;
-    const message = (document.getElementById("message") as HTMLTextAreaElement).value;
+//     if (!name.value || !email.value || !message.value) {
+//       result.textContent = "Please fill in all fields.";
+//       result.setAttribute("role", "alert");
+//       return;
+//     }
 
-    if (!name || !email || !message) {
-      alert("Please fill in all fields.");
-      return;
-    }
+//     if (!email.validity.valid) {
+//       result.textContent = "Please enter a valid email address.";
+//       result.setAttribute("role", "alert");
+//       return;
+//     }
 
-    if (!email.includes("@")) {
-      alert("Enter a valid email.");
-      return;
-    }
+//     result.textContent = "Message sent successfully!";
+//     result.setAttribute("role", "status");
 
-    alert("Message sent successfully!");
-  }
+//     name.value = "";
+//     email.value = "";
+//     message.value = "";
+//   }
 
-  return (
-    <main style={{ padding: "20px" }}>
-      <ThemeToggle />
+//   return (
+//     <main className="flex flex-col items-center min-h-screen p-8">
+//       <h1 className="text-4xl font-bold mb-4">Contact</h1>
 
-      <nav>
-        <Link href="/">Back to Home</Link>
-      </nav>
+//       <p className="mb-8 text-center">Send me a message below:</p>
 
-      <h1>Contact</h1>
+//       <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-lg">
+//         <div>
+//           <label htmlFor="name">Name</label>
+//           <input id="name" type="text" className="block border p-2 w-full text-black" />
+//         </div>
 
-      <p>Send me a message below:</p>
+//         <div>
+//           <label htmlFor="email">Email</label>
+//           <input id="email" type="email" className="block border p-2 w-full text-black" />
+//         </div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label><br />
-          <input type="text" id="name" />
-        </div>
+//         <div>
+//           <label htmlFor="message">Message</label>
+//           <textarea id="message" className="block border p-2 w-full text-black" />
+//         </div>
 
-        <br />
+//         <button type="submit" className="border px-4 py-2 rounded">
+//           Send Message
+//         </button>
 
-        <div>
-          <label>Email:</label><br />
-          <input type="email" id="email" />
-        </div>
-
-        <br />
-
-        <div>
-          <label>Message:</label><br />
-          <textarea id="message" />
-        </div>
-
-        <br />
-
-        <button type="submit">Send</button>
-      </form>
-    </main>
-  );
-}
+//         <p id="form-result" aria-live="polite"></p>
+//       </form>
+//     </main>
+//   );
+// }

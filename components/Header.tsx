@@ -6,7 +6,6 @@ export default function Header() {
     <header>
       <h1>Week 4 React Refactor</h1>
       <Nav />
-      <ThemeToggle />
     </header>
   );
 }

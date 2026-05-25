@@ -1,35 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
+export default function ContactForm() {
+  const handleClick = () => {
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const name = document.getElementById("name") as HTMLInputElement;
+    const email = document.getElementById("email") as HTMLInputElement;
+    const message = document.getElementById("message") as HTMLTextAreaElement;
+    const result = document.getElementById("form-result") as HTMLParagraphElement;
 
-export default function ThemeToggle() {
-  const [theme, setTheme] = useState("light");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+      if (!name.value || !email.value || !message.value) {
+        result.textContent = "Please fill out all fields.";
+        result.setAttribute("role", "alert");
+        return;
+      }
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
+      if (!email.validity.valid) {
+        result.textContent = "Please enter a valid email address.";
+        result.setAttribute("role", "alert");
+        return;
+      }
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-
-    document.body.style.backgroundColor =
-      theme === "dark" ? "#111" : "#fff";
-
-    document.body.style.color =
-      theme === "dark" ? "#fff" : "#000";
-  }, [theme]);
+      result.textContent = "Thank you! Your message was submitted.";
+      form.reset();
+    });
+  };
 
   return (
-    <button
-      onClick={() =>
-        setTheme(theme === "light" ? "dark" : "light")
-      }
-    >
-      {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-    </button>
+    <form id="contact-form" onMouseEnter={handleClick} className="space-y-4 max-w-md">
+      <div>
+        <label htmlFor="name">Name</label>
+        <input id="name" type="text" className="block border p-2 w-full" />
+      </div>
+
+      <div>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="email" className="block border p-2 w-full" />
+      </div>
+
+      <div>
+        <label htmlFor="message">Message</label>
+        <textarea id="message" className="block border p-2 w-full" />
+      </div>
+
+      <button type="submit" className="border px-4 py-2 rounded">
+        Send Message
+      </button>
+
+      <p id="form-result" aria-live="polite"></p>
+    </form>
   );
 }

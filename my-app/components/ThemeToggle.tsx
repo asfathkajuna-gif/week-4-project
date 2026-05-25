@@ -2,14 +2,19 @@
 
 export default function ThemeToggle() {
   function toggleTheme() {
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle("dark-mode");
 
-    if (document.body.classList.contains("dark")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
+    const isDark = document.body.classList.contains("dark-mode");
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
   }
 
-  return <button onClick={toggleTheme}>Toggle Theme</button>;
+  return (
+    <button
+      onClick={toggleTheme}
+      className="border px-4 py-2 rounded"
+    >
+      Toggle Theme
+    </button>
+  );
 }

@@ -1,5 +1,9 @@
-
-body.dark {
-  background-color: black;
+.dark-mode {
+  background-color: #111827;
   color: white;
+}
+
+.dark-mode input,
+.dark-mode textarea {
+  color: black;
 }
