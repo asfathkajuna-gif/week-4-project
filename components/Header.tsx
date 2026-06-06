@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle";
 export default function Header() {
   return (
     <header>
-      <h1>Week 4 React Refactor</h1>
+      <h1>Modern Web Development Portfolio</h1>
       <Nav />
     </header>
   );

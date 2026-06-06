@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Week 4 React Refactor",
+  title: "Modern web development Portfolio",
   description: "React component architecture assignment",
 };
 
