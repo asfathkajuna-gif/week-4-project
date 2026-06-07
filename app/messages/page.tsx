@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -14,19 +16,10 @@ export default async function MessagesPage() {
 
       <ul className="space-y-4">
         {messages.map((message) => (
-          <li
-            key={message.id}
-            className="border p-4 rounded-lg"
-          >
-            <p>
-              <strong>Name:</strong> {message.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {message.email}
-            </p>
-            <p>
-              <strong>Message:</strong> {message.body}
-            </p>
+          <li key={message.id} className="border p-4 rounded-lg">
+            <p><strong>Name:</strong> {message.name}</p>
+            <p><strong>Email:</strong> {message.email}</p>
+            <p><strong>Message:</strong> {message.body}</p>
             <p className="text-sm mt-2">
               {message.createdAt.toLocaleString()}
             </p>
