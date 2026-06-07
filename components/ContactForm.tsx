@@ -1,12 +1,11 @@
-
 "use client";
 
-export default function ContactForm() {
+import { createMessage } from "@/app/actions";
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+export default function ContactForm() {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Get form values
     const form = e.currentTarget;
 
     const nameInput = form.querySelector(
@@ -17,91 +16,68 @@ export default function ContactForm() {
       'input[name="email"]'
     ) as HTMLInputElement;
 
-    const messageInput = form.querySelector(
-      'textarea[name="message"]'
+    const bodyInput = form.querySelector(
+      'textarea[name="body"]'
     ) as HTMLTextAreaElement;
 
-    // Error message elements
     const nameError = document.getElementById("nameError");
     const emailError = document.getElementById("emailError");
-    const messageError = document.getElementById("messageError");
-    const successMessage = document.getElementById("successMessage");
+    const bodyError = document.getElementById("bodyError");
+    const successMessage =
+      document.getElementById("successMessage");
 
-    // Reset previous errors
     nameError!.textContent = "";
     emailError!.textContent = "";
-    messageError!.textContent = "";
+    bodyError!.textContent = "";
     successMessage!.textContent = "";
 
-    // Reset styles
     nameInput.style.border = "2px solid gray";
     emailInput.style.border = "2px solid gray";
-    messageInput.style.border = "2px solid gray";
-
-    nameInput.style.backgroundColor = "white";
-    emailInput.style.backgroundColor = "white";
-    messageInput.style.backgroundColor = "white";
+    bodyInput.style.border = "2px solid gray";
 
     let isValid = true;
 
-    // Name validation
     if (nameInput.value.trim() === "") {
       nameError!.textContent = "Name is required";
       nameError!.style.color = "red";
-
       nameInput.style.border = "2px solid red";
-      nameInput.style.backgroundColor = "#ffe5e5";
-
       isValid = false;
     }
 
-    // Email validation
     if (emailInput.value.trim() === "") {
       emailError!.textContent = "Email is required";
       emailError!.style.color = "red";
-
       emailInput.style.border = "2px solid red";
-      emailInput.style.backgroundColor = "#ffe5e5";
-
       isValid = false;
-
-    } else if (
-      !/\S+@\S+\.\S+/.test(emailInput.value)
-    ) {
-      emailError!.textContent =
-        "Please enter a valid email";
-
+    } else if (!/\S+@\S+\.\S+/.test(emailInput.value)) {
+      emailError!.textContent = "Please enter a valid email";
       emailError!.style.color = "red";
-
       emailInput.style.border = "2px solid red";
-      emailInput.style.backgroundColor = "#ffe5e5";
-
       isValid = false;
     }
 
-    // Message validation
-    if (messageInput.value.trim() === "") {
-      messageError!.textContent =
-        "Message is required";
-
-      messageError!.style.color = "red";
-
-      messageInput.style.border = "2px solid red";
-      messageInput.style.backgroundColor = "#ffe5e5";
-
+    if (bodyInput.value.trim() === "") {
+      bodyError!.textContent = "Message is required";
+      bodyError!.style.color = "red";
+      bodyInput.style.border = "2px solid red";
       isValid = false;
     }
 
-    // Success message
-    if (isValid) {
-      successMessage!.textContent =
-        "Message sent successfully!";
+    if (!isValid) return;
 
-      successMessage!.style.color = "green";
-      successMessage!.style.fontWeight = "bold";
+    const formData = new FormData();
+    formData.append("name", nameInput.value);
+    formData.append("email", emailInput.value);
+    formData.append("body", bodyInput.value);
 
-      form.reset();
-    }
+    await createMessage(formData);
+
+    successMessage!.textContent =
+      "Message saved successfully!";
+    successMessage!.style.color = "green";
+    successMessage!.style.fontWeight = "bold";
+
+    form.reset();
   }
 
   return (
@@ -114,8 +90,6 @@ export default function ContactForm() {
       <h2>Contact Me</h2>
 
       <form onSubmit={handleSubmit} noValidate>
-
-        {/* Name */}
         <label>Name</label>
         <br />
 
@@ -132,7 +106,6 @@ export default function ContactForm() {
 
         <p id="nameError"></p>
 
-        {/* Email */}
         <label>Email</label>
         <br />
 
@@ -149,12 +122,11 @@ export default function ContactForm() {
 
         <p id="emailError"></p>
 
-        {/* Message */}
         <label>Message</label>
         <br />
 
         <textarea
-          name="message"
+          name="body"
           rows={5}
           style={{
             width: "100%",
@@ -164,9 +136,8 @@ export default function ContactForm() {
           }}
         />
 
-        <p id="messageError"></p>
+        <p id="bodyError"></p>
 
-        {/* Submit Button */}
         <button
           type="submit"
           style={{
@@ -181,14 +152,12 @@ export default function ContactForm() {
           Send Message
         </button>
 
-        {/* Success Message */}
         <p
           id="successMessage"
           style={{
             marginTop: "20px",
           }}
         ></p>
-
       </form>
     </div>
   );
