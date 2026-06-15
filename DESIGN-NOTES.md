@@ -69,3 +69,11 @@ The project supports `prefers-reduced-motion` through CSS media queries. Users w
 ### Motion Decisions
 
 The skeleton screen animation is functional because it communicates that content is loading. Decorative animations were avoided because they do not improve the user's understanding of the application's state.
+
+## Week 9: Authentication, Security, and Performance
+
+This week I implemented GitHub authentication using Auth.js. Users must authenticate before accessing the protected messages page.
+
+I applied two OWASP Top 10 mitigations. First, Prisma ORM protects against SQL injection through parameterized queries. Second, security headers were configured to reduce security misconfiguration risks.
+
+Authentication was tested successfully using GitHub OAuth. Protected routes redirect unauthenticated users and display user session information after login.
